@@ -1,0 +1,5 @@
+defense,docs_with_zw,codepoints_changed,rendering_changed_any_font
+nfc,340,186,0
+strip_all,340,340,44
+position_aware,340,214,12
+render_equivalence,340,183,0

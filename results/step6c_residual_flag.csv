@@ -1,0 +1,6 @@
+set,kind,n,flag_rate
+gated_inert_ALL,attacked,1500,0.0013
+gated_both_ALL,attacked,1500,0.0013
+ungated_semi_ALL_old,attacked,1500,0.734
+real comments containing zero-width,benign,340,0.2206
+all clean test comments,benign,5029,0.0026

@@ -1,0 +1,6 @@
+defense,ms_per_comment
+none,0.0001
+nfc,0.011
+strip_all,0.0017
+position_aware,0.0256
+render_equivalence,3.1933

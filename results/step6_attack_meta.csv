@@ -1,0 +1,11 @@
+config,mean_inserted,pct_with_insertion,pct_visible_any_font,secs
+gated_inert_b1,1.0,1.0,0.0,2.3
+gated_inert_b3,3.0,1.0,0.0,1.5
+gated_inert_b5,4.99,1.0,0.0,1.8
+gated_inert_b10,9.74,1.0,0.0,1.9
+gated_inert_ALL,36.32,1.0,0.0,5.1
+gated_inert_ALL_zwj,36.38,1.0,0.0,6.3
+gated_adaptive_hasant_ALL,0.23,0.162,0.0,0.5
+gated_both_ALL,36.55,1.0,0.0,2.9
+ungated_semi_ALL_old,38.37,1.0,0.7327,1.1
+gated_inert_ALL_notoOnly,37.16,1.0,0.464,0.9

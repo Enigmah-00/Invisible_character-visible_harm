@@ -1,0 +1,4 @@
+model,seed,tokenizer,config,n_targets,evasion
+google/muril-base-cased,42,BertTokenizer,gated_inert_ALL,1392,0.0
+google/muril-base-cased,42,BertTokenizer,gated_adaptive_hasant_ALL,1392,0.0
+google/muril-base-cased,42,BertTokenizer,gated_both_ALL,1392,0.0

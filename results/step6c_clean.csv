@@ -1,0 +1,2 @@
+model,family,defense_on_clean,acc,f1
+csebuetnlp/banglat5,SentencePiece,none,0.7534,0.73

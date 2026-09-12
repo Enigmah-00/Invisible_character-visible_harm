@@ -1,0 +1,2 @@
+model,seed,benign_fpr_clean,benign_fpr_attacked,benign_flip_rate
+google/muril-base-cased,42,0.084,0.084,0.0

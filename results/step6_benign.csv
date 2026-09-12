@@ -1,0 +1,5 @@
+model,seed,benign_fpr_clean,benign_fpr_attacked,benign_flip_rate
+xlm-roberta-base,42,0.104,0.01,0.1033
+xlm-roberta-base,43,0.1,0.0087,0.098
+xlm-roberta-base,44,0.0873,0.0293,0.0953
+csebuetnlp/banglabert,42,0.0973,0.0967,0.0007

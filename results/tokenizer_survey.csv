@@ -1,0 +1,11 @@
+model,tokenizer,vulnerable,clean_len,atk_len
+csebuetnlp/banglabert,BertTokenizer,False,4.0,4.0
+csebuetnlp/banglishbert,BertTokenizer,False,4.0,4.0
+sagorsarker/bangla-bert-base,BertTokenizer,False,4.0,4.0
+google/muril-base-cased,BertTokenizer,False,4.0,4.0
+bert-base-multilingual-cased,BertTokenizer,False,8.0,8.0
+xlm-roberta-base,XLMRobertaTokenizer,True,7.0,11.0
+ai4bharat/indic-bert,LOAD_FAIL,,,
+csebuetnlp/banglat5,T5Tokenizer,True,4.0,8.0
+google/mt5-base,T5Tokenizer,True,8.0,11.0
+facebook/mbart-large-50,MBart50Tokenizer,True,7.0,11.0

@@ -1,0 +1,4 @@
+attack,n_targets,evasion_no_defense,evasion_after_render_eq,flag_rate,UNMITIGATED_evasion
+gated_inert_ALL,1402,0.6712,0.0,0.0014,0.0
+gated_both_ALL,1402,0.674,0.0,0.0014,0.0
+ungated_semi_ALL_old,1402,0.9137,0.0913,0.7411,0.0

@@ -1,0 +1,6 @@
+model,defense_on_clean,acc,f1
+google/muril-base-cased,none,0.9187,0.9165
+google/muril-base-cased,nfc,0.9187,0.9165
+google/muril-base-cased,strip_all,0.9187,0.9165
+google/muril-base-cased,position_aware,0.9187,0.9165
+google/muril-base-cased,render_equivalence,0.9187,0.9165
