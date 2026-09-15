@@ -31,11 +31,21 @@ REQUIRED = {
     "step6_exact_recovery.csv":  "nb06 cell 6",
     "step6_clean_cost.csv":      "nb06 cell 8",
     "step6_benign.csv":          "nb06 cell 8",
+    "human_study.csv":           "tools/score_google_form.py",
+    "step12_ladder.csv":         "nb12 (transformers 4.46.3)",
+    "step12_clean_cost.csv":     "nb12 (transformers 4.46.3)",
+    "step12_defense.csv":        "nb12 (transformers 4.46.3)",
+    "step12_benign.csv":         "nb12 (transformers 4.46.3)",
+    "step13_ladder.csv":         "nb13 (transformers 4.46.3)",
+    "step13_clean_cost.csv":     "nb13 (transformers 4.46.3)",
+    "step13_defense.csv":        "nb13 (transformers 4.46.3)",
+    "step13_benign.csv":         "nb13 (transformers 4.46.3)",
     "step6c_ladder.csv":         "nb06c cell 6",
     "step6c_defense.csv":        "nb06c cell 6",
     "step6c_residual_flag.csv":  "nb06c cell 4",
     "step6c_clean.csv":          "nb06c cell 6",
     "step6b_ladder.csv":         "nb06b cell 6",
+    "step6b_clean_cost.csv":     "nb06b cell 6",
     "step6d_pipeline.csv":       "nb06d cell 6",
     "step7_llm_evasion.csv":     "nb07 cell 5",
     "step7_llm_controls.csv":    "nb07 cell 5",
@@ -105,15 +115,29 @@ names = ["none", "nfc", "strip_all", "position_aware", "render_equivalence"]
 lab = ["none", "NFC", "strip-all", "position-\naware", "render-\nequivalence"]
 c2 = coll.set_index("defense")["rendering_changed_any_font"].reindex(names).fillna(0)
 tot = int(coll["docs_with_zw"].iloc[0])
-fig, axes = plt.subplots(1, 2, figsize=COL2)
-axes[0].bar(lab, [d.get(n, float("nan")) for n in names], color="#B4413C", width=.6)
+fig, axes = plt.subplots(1, 2, figsize=(COL2[0], 2.55))
+# generous gap: panel (b)'s y-axis label used to collide with panel (a)
+fig.subplots_adjust(wspace=0.32)
+
+va = [d.get(n, float("nan")) for n in names]
+b0 = axes[0].bar(lab, va, color="#B4413C", width=.62)
 axes[0].set_ylabel("evasion rate (%)")
-axes[0].set_title("(a) security: attack stopped?")
-axes[1].bar(lab, c2.values, color="#1F4E79", width=.6)
-axes[1].set_ylabel(f"real comments visibly corrupted\n(of {tot} containing zero-width)")
-axes[1].set_title("(b) collateral: real text broken?")
+axes[0].set_title("(a) security: is the attack stopped?", fontsize=8)
+axes[0].set_ylim(0, max(v for v in va if v == v) * 1.18)
+axes[0].bar_label(b0, fmt="%.1f", fontsize=6.5, padding=1.5)
+
+b1 = axes[1].bar(lab, c2.values, color="#1F4E79", width=.62)
+axes[1].set_ylabel("comments corrupted")          # short: no more collision
+axes[1].set_title(f"(b) collateral: real Bangla broken?\n(of {tot} comments containing zero-width)",
+                  fontsize=8)
+axes[1].set_ylim(0, max(c2.values) * 1.22)
+axes[1].bar_label(b1, fmt="%d", fontsize=6.5, padding=1.5)
+
 for a in axes:
-    a.tick_params(axis="x", labelsize=6.5)
+    a.tick_params(axis="x", labelsize=6.2)
+    a.margins(x=0.06)
+    for sp in ("top", "right"):
+        a.spines[sp].set_visible(False)
 save(fig, "fig_defense.pdf", "step6_defense.csv (evasion) + step6_wild_collateral.csv (rendering_changed_any_font)")
 
 # ---------------------------------------------------------------- figure 3
@@ -135,28 +159,33 @@ else:
     print("SKIP fig_inflation.pdf - run nb06b to produce results/step6b_inflation.csv.")
     print("     step5_llm_tokenizers.csv is NOT usable: it measured the old ungated attack.")
 
-# ---------------------------------------------------------------- figure 4
-cf = L("step6_crossfont.csv").sort_values("visibly_broken", ascending=True)
-fig, ax = plt.subplots(figsize=COL1)
-ax.barh(cf["held_out_font"], cf["visibly_broken"] / cf["of"] * 100, color="#B4413C")
-ax.set_xlabel("comments visibly broken (%)")
-save(fig, "fig_crossfont.pdf", "step6_crossfont.csv (visibly_broken / of)")
-
+# (the cross-font figure was cut from the paper for space; its two numbers
+#  are quoted in the prose straight from step6_crossfont.csv)
 
 # ----------------------------------------------------------------- tables
-def tabular(df, cols, header, caption, label, fmt=None, width=None):
+def tabular(df, cols, header, caption, label, fmt=None, width=None, wide=False):
+    """Emit one IEEE table. wide=True spans both columns (table*).
+
+    Every table is \footnotesize: at normal size the long model and tokenizer
+    names run past the column edge."""
     fmt = fmt or {}
     body = []
     for _, r in df.iterrows():
         cells = [fmt.get(c, str)(r[c]) for c in cols]
         body.append(" & ".join(cells) + r" \\")
     spec = width or ("l" + "r" * (len(cols) - 1))
+    env = "table*" if wide else "table"
     return "\n".join([
-        r"\begin{table}[t]", r"\centering",
+        r"\begin{" + env + "}[t]", r"\centering",
         r"\caption{" + caption + "}", r"\label{tab:" + label + "}",
+        r"\footnotesize",
+        # adjustbox shrinks only if the table is too wide, so a long row can
+        # never run past the column edge.
+        r"\begin{adjustbox}{max width=" + ("\\textwidth" if wide else "\\columnwidth") + "}",
         r"\begin{tabular}{" + spec + "}", r"\hline",
         " & ".join(header) + r" \\", r"\hline",
-        *body, r"\hline", r"\end{tabular}", r"\end{table}", ""])
+        *body, r"\hline", r"\end{tabular}",
+        r"\end{adjustbox}", r"\end{" + env + "}", ""])
 
 
 def w(name, text, src):
@@ -166,8 +195,35 @@ def w(name, text, src):
     print("wrote", p)
 
 
-pct = lambda v: f"{float(v)*100:.1f}"
+def pct(v):
+    return "--" if pd.isna(v) else f"{float(v)*100:.1f}"
+
+
+def num(v, d=2):
+    return "--" if pd.isna(v) else f"{float(v):.{d}f}"
 esc = lambda v: str(v).replace("_", r"\_")
+
+# Internal run names are long and ugly. Rename them for print only.
+ATTACK_LABEL = {
+    "gated_inert_b1": "invisible, 1 char", "gated_inert_b3": "invisible, 3",
+    "gated_inert_b5": "invisible, 5", "gated_inert_b10": "invisible, 10",
+    "gated_inert_ALL": "invisible, all", "gated_inert_ALL_zwj": "invisible, all (ZWJ)",
+    "gated_adaptive_hasant_ALL": "adaptive", "gated_both_ALL": "invisible + adaptive",
+    "ungated_semi_ALL_old": "unverified", "every budget": "every budget",
+}
+MODEL_LABEL = {
+    "xlm-roberta-base": "XLM-R", "csebuetnlp/banglabert": "BanglaBERT",
+    "google/muril-base-cased": "MuRIL", "csebuetnlp/banglat5": "BanglaT5",
+}
+DEF_LABEL = {"none": "none", "nfc": "NFC", "strip_all": "strip-all",
+             "position_aware": "position-aware", "render_equivalence": "render-equivalence"}
+SET_LABEL = dict(ATTACK_LABEL, **{
+    "real comments containing zero-width": "real comments with zero-width",
+    "all clean test comments": "all clean test comments"})
+alab = lambda v: ATTACK_LABEL.get(str(v), esc(v))
+mlab = lambda v: MODEL_LABEL.get(str(v), esc(v))
+dlab = lambda v: DEF_LABEL.get(str(v), esc(v))
+slab = lambda v: SET_LABEL.get(str(v), esc(v))
 
 t = L("tokenizer_survey.csv")
 t = t[t.tokenizer != "LOAD_FAIL"].copy()
@@ -178,19 +234,22 @@ w("tab_tokenizer.tex", tabular(
     ["Model", "Tokenizer class", "Exposed", "Token infl."],
     "Zero-width characters reach the model only for SentencePiece and BPE tokenizers. "
     "\\texttt{BertTokenizer.\\_clean\\_text} deletes every Unicode category-C character.",
-    "tokenizer", {"model": esc, "tokenizer": esc}, "llcr"),
+    "tokenizer", {"model": esc, "tokenizer": esc}, "llcr", wide=True),
     "tokenizer_survey.csv")
 
 lad = ladder.groupby(["model", "config"], sort=False).agg(
     ev=("evasion", "mean"), sd=("evasion", "std"),
     ev128=("evasion_at_maxlen128", "mean")).reset_index()
 lad = lad[lad.config.isin(order + ["gated_adaptive_hasant_ALL", "ungated_semi_ALL_old"])]
-# BanglaBERT is 0.0 at every budget; one row says it, fourteen rows waste a column.
-bb = lad[lad.model == "csebuetnlp/banglabert"]
-lad = pd.concat([lad[lad.model != "csebuetnlp/banglabert"],
-                 bb[bb.config == "gated_inert_ALL"].assign(config="all budgets")])
 lad["ins"] = lad["config"].map(meta).round(2)
 lad["vis"] = lad["config"].map(L("step6_attack_meta.csv").set_index("config")["pct_visible_any_font"])
+# BanglaBERT is 0.0 at every budget; one row says it. Relabel AFTER the lookups,
+# otherwise the new label has no entry in the meta table and the row shows NaN.
+bb = lad[lad.model == "csebuetnlp/banglabert"]
+bb = bb[bb.config == "gated_inert_ALL"].copy()
+bb["config"] = "every budget"
+bb["ins"] = float("nan")
+lad = pd.concat([lad[lad.model != "csebuetnlp/banglabert"], bb])
 lad["evs"] = lad.apply(lambda r: f"{r.ev*100:.1f}" + (f" $\\pm$ {r.sd*100:.1f}" if pd.notna(r.sd) else ""), axis=1)
 w("tab_ladder.tex", tabular(
     lad, ["model", "config", "ins", "vis", "evs", "ev128"],
@@ -198,7 +257,8 @@ w("tab_ladder.tex", tabular(
     "Evasion under the rendering-verified attack, mean $\\pm$ std over 3 seeds. "
     "`Visible' is the share of comments that render differently in any of 8 fonts. "
     "The @128 column shows the truncation control.",
-    "ladder", {"model": esc, "config": esc, "vis": pct, "ev128": pct}, "llrrrr"),
+    "ladder", {"model": mlab, "config": alab, "ins": num, "vis": pct, "ev128": pct},
+    "llrrrr", wide=True),
     "step6_ladder.csv + step6_attack_meta.csv")
 
 lat = L("step6_latency.csv").set_index("defense")["ms_per_comment"]
@@ -218,39 +278,56 @@ w("tab_defense.tex", tabular(
     ["Defense", "Evasion", "Adaptive", f"Corrupted/{tot}", "ms"],
     "All defenses stop the attack. They differ on collateral damage to the "
     f"{tot} real comments that already contain zero-width characters.",
-    "defense", {"defense": esc, "inert": pct, "adapt": pct,
+    "defense", {"defense": dlab, "inert": pct, "adapt": pct,
                 "vis": lambda v: str(int(v)), "ms": lambda v: f"{float(v):.3f}"}, "lrrrr"),
     "step6_defense.csv + step6_wild_collateral.csv + step6_latency.csv")
 
-# ---- cross-model table: tokenizer family decides exposure ----------------
+# ---- cross-model table: five models, ONE library, ONE protocol ----------
+UL = pd.concat([L("step13_ladder.csv"), L("step12_ladder.csv")])
+UC = pd.concat([L("step13_clean_cost.csv"), L("step12_clean_cost.csv")])
+UD = pd.concat([L("step13_defense.csv"), L("step12_defense.csv")])
+uacc = UC[UC.defense_on_clean == "none"].set_index("model").acc
+SHORT = {"csebuetnlp/banglabert": "BanglaBERT", "google/muril-base-cased": "MuRIL",
+         "xlm-roberta-base": "XLM-R", "microsoft/mdeberta-v3-base": "mDeBERTa-v3",
+         "csebuetnlp/banglat5": "BanglaT5"}
 rows = []
-for f, src in [("step6_ladder.csv", "nb06"), ("step6b_ladder.csv", "nb06b"), ("step6c_ladder.csv", "nb06c")]:
-    d = L(f)
-    d = d[d.config == "gated_inert_ALL"]
-    for m, g in d.groupby("model", sort=False):
-        rows.append({"model": m, "tok": g["tokenizer"].iloc[0],
-                     "ev": g["evasion"].mean(), "n": int(g["n_targets"].iloc[0])})
-cm = pd.DataFrame(rows).drop_duplicates("model")
-FAM = {"BertTokenizer": "WordPiece", "XLMRobertaTokenizer": "SentencePiece",
-       "T5Tokenizer": "SentencePiece", "DebertaV2Tokenizer": "SentencePiece"}
-cm["fam"] = cm["tok"].map(lambda t: FAM.get(t, t))
-acc = {}
-for f, col in [("step6_clean_cost.csv", "defense_on_clean"), ("step6c_clean.csv", "defense_on_clean")]:
-    d = L(f); d = d[d[col] == "none"]
-    for m, g in d.groupby("model"):
-        acc[m] = g["acc"].mean()
-cm["acc"] = cm["model"].map(acc)
-cm = cm.sort_values("ev")
+for m, nice in SHORT.items():
+    g = UL[(UL.model == m) & (UL.config == "gated_inert_ALL")]
+    if g.empty:
+        continue
+    dd = UD[(UD.model == m) & (UD.attack == "gated_both_ALL")].set_index("defense").evasion
+    rows.append({"model": nice, "fam": g.family.iloc[0], "acc": uacc.get(m),
+                 "ev": g.evasion.iloc[0], "pa": dd.get("position_aware"),
+                 "ours": dd.get("render_equivalence")})
+cm = pd.DataFrame(rows).sort_values(["fam", "ev"])
 w("tab_crossmodel.tex", tabular(
-    cm, ["model", "fam", "acc", "ev"],
-    ["Model", "Tokenizer family", "Clean acc.", "Evasion (\\%)"],
-    "Exposure follows the tokenizer family, not the model or the language. "
-    "BanglaBERT and BanglaT5 come from the same group and the same Bangla corpus; "
-    "only the tokenizer differs.",
+    cm, ["model", "fam", "acc", "ev", "pa", "ours"],
+    ["Model", "Tokenizer family", "Clean acc.", "Evasion (\\%)",
+     "Position-aware", "Ours"],
+    "Five models, one training protocol and one library version "
+    "(\\texttt{transformers} 4.46.3). Exposure follows the tokenizer family, not the "
+    "model or the language: BanglaBERT and BanglaT5 come from the same group and the same "
+    "Bangla corpus. The last two columns give evasion under the adaptive attack after the "
+    "rule-based defense and after ours.",
     "crossmodel", {"model": esc, "fam": esc,
-                   "acc": lambda v: f"{float(v):.3f}" if pd.notna(v) else "--",
-                   "ev": pct}, "llrr"),
-    "step6_ladder.csv + step6b_ladder.csv + step6c_ladder.csv + clean_cost")
+                   "acc": lambda v: "--" if pd.isna(v) else f"{float(v):.3f}",
+                   "ev": pct, "pa": pct, "ours": pct}, "llrrrr", wide=True),
+    "step13_* + step12_* (unified protocol, transformers 4.46.3)")
+
+# ---- human perceptibility study ------------------------------------------
+hs = L("human_study.csv")
+hs = hs[hs.group == "all"].copy()
+hs["res"] = hs.apply(lambda r: f"{int(r.k)}/{int(r.n)} ({r.rate*100:.1f}\\%)", axis=1)
+hs["ci"] = hs.apply(lambda r: f"{r.ci_low*100:.1f}--{r.ci_high*100:.1f}", axis=1)
+w("tab_human.tex", tabular(
+    hs, ["stimulus", "measure", "res", "ci"],
+    ["Stimulus", "Judgement", "Count", "95\\% CI"],
+    f"Perceptibility study, {int(hs.n_participants.iloc[0])} Bangla readers, 30 trials each. "
+    "Every participant identified all five genuinely different pairs, so the null result "
+    "is not inattention. Attacked pairs were called different less often than two "
+    "identical images.",
+    "human", {"stimulus": esc, "measure": esc}, "llrr"),
+    "human_study.csv")
 
 # ---- residual flag table --------------------------------------------------
 fl = L("step6c_residual_flag.csv")
@@ -259,20 +336,19 @@ w("tab_flag.tex", tabular(
     ["Input set", "Type", "$n$", "Flagged (\\%)"],
     "Residual flag after render-equivalence. Imperceptible attacks are already "
     "removed, so what remains and fires the flag is a manipulation a reader can see.",
-    "flag", {"set": esc, "kind": esc, "n": lambda v: str(int(v)), "flag_rate": pct}, "llrr"),
+    "flag", {"set": slab, "kind": esc, "n": lambda v: str(int(v)), "flag_rate": pct}, "llrr"),
     "step6c_residual_flag.csv")
 
 # ---- end-to-end pipeline table -------------------------------------------
 pl = L("step6d_pipeline.csv")
 w("tab_pipeline.tex", tabular(
-    pl, ["attack", "evasion_no_defense", "evasion_after_render_eq", "flag_rate", "UNMITIGATED_evasion"],
-    ["Attack", "No defense", "After ours", "Flagged", "Unmitigated"],
+    pl, ["attack", "evasion_after_render_eq", "flag_rate", "UNMITIGATED_evasion"],
+    ["Attack", "After ours", "Flagged", "Unmitigated"],
     "End-to-end pipeline on XLM-R. `Unmitigated\' means the comment evaded the "
     "classifier and the flag never fired, so no reviewer would ever see it. "
     "Imperceptible attacks are removed; visible ones are flagged.",
-    "pipeline", {"attack": esc, "evasion_no_defense": pct,
-                 "evasion_after_render_eq": pct, "flag_rate": pct,
-                 "UNMITIGATED_evasion": pct}, "lrrrr"),
+    "pipeline", {"attack": alab, "evasion_after_render_eq": pct,
+                 "flag_rate": pct, "UNMITIGATED_evasion": pct}, "lrrr"),
     "step6d_pipeline.csv")
 
 llm = L("step7_llm_evasion.csv")
@@ -280,14 +356,18 @@ w("tab_llm.tex", tabular(
     llm, ["attack", "n_targets", "pct_visible_any_font", "evasion_NO", "YES_after_render_equivalence"],
     ["Attack", "$n$", "Visible", "Evasion", "Restored"],
     "Qwen2.5-7B-Instruct as a zero-shot Bangla moderator, BD-SHS test split.",
-    "llm", {"attack": esc, "n_targets": lambda v: str(int(v)),
+    "llm", {"attack": alab, "n_targets": lambda v: str(int(v)),
             "pct_visible_any_font": pct, "evasion_NO": pct,
             "YES_after_render_equivalence": pct}, "lrrrr"),
     "step7_llm_evasion.csv")
 
+notes.append("- `fig_example.pdf` <- built by `tools/make_example_figure.py`; renders the "
+             "attack and the RAB example with HarfBuzz and refuses to write the file "
+             "unless the two bitmaps in panel (a) are pixel-identical")
 open("paper/NUMBERS.md", "w").write(
-    "# Provenance\n\nEvery asset below is generated by `tools/make_paper_assets.py` "
-    "from a CSV written by a notebook. No value is entered by hand.\n\n" +
+    "# Provenance\n\nEvery figure and table in the paper is generated by a script from a CSV "
+    "written by a notebook. No value is entered by hand. Regenerating reproduces every file "
+    "byte for byte.\n\n" +
     "\n".join(notes) + "\n")
 print("\nwrote paper/NUMBERS.md")
 print("done:", len([n for n in notes]), "assets")

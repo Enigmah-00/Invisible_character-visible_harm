@@ -1,0 +1,2 @@
+train_size,batch,epochs,maxlen,seed,precision
+40224,32,2,128,42,fp32

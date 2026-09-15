@@ -1,0 +1,4 @@
+model,ok,lr,transformers,skipped_steps,error
+csebuetnlp/banglabert,True,2e-05,4.46.3,0,
+google/muril-base-cased,True,2e-05,4.46.3,0,
+xlm-roberta-base,True,2e-05,4.46.3,0,

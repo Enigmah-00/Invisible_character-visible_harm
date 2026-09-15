@@ -1,0 +1,2 @@
+model,family,benign_fpr_clean,benign_fpr_attacked,benign_flip_rate
+csebuetnlp/banglat5,SentencePiece,0.206,0.2487,0.3067

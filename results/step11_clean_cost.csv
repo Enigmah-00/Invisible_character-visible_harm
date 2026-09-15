@@ -1,0 +1,6 @@
+model,family,defense_on_clean,acc,f1
+csebuetnlp/banglat5,SentencePiece,none,0.8383,0.837
+csebuetnlp/banglat5,SentencePiece,nfc,0.8383,0.837
+csebuetnlp/banglat5,SentencePiece,strip_all,0.8389,0.8376
+csebuetnlp/banglat5,SentencePiece,position_aware,0.8389,0.8376
+csebuetnlp/banglat5,SentencePiece,render_equivalence,0.8387,0.8374

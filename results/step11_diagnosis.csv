@@ -1,0 +1,6 @@
+config,dynamic_pad,exclude_ln_decay,grad_ckpt,steps_survived,first_bad_grad,nonfinite_loss_at,ok
+A as-is,False,False,True,1,,1,False
+B dynamic padding,True,False,True,1,,1,False
+C no decay on LayerNorm,False,True,True,1,,1,False
+D no checkpointing,False,False,False,1,,1,False
+E all three,True,True,False,1,,1,False

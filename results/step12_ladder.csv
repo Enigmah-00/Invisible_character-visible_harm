@@ -1,0 +1,7 @@
+model,family,tokenizer,config,n_targets,skipped_steps,evasion
+microsoft/mdeberta-v3-base,SentencePiece,DebertaV2TokenizerFast,gated_inert_ALL,1401,0,0.9879
+microsoft/mdeberta-v3-base,SentencePiece,DebertaV2TokenizerFast,gated_adaptive_hasant_ALL,1401,0,0.0036
+microsoft/mdeberta-v3-base,SentencePiece,DebertaV2TokenizerFast,gated_both_ALL,1401,0,0.9879
+csebuetnlp/banglat5,SentencePiece,T5TokenizerFast,gated_inert_ALL,1317,0,0.9848
+csebuetnlp/banglat5,SentencePiece,T5TokenizerFast,gated_adaptive_hasant_ALL,1317,0,0.0061
+csebuetnlp/banglat5,SentencePiece,T5TokenizerFast,gated_both_ALL,1317,0,0.9848

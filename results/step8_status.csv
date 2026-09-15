@@ -1,0 +1,6 @@
+model,family,ok,lr,warmup,note
+csebuetnlp/banglabert,WordPiece,True,2e-05,0.2,
+google/muril-base-cased,WordPiece,True,2e-05,0.2,
+xlm-roberta-base,SentencePiece,True,2e-05,0.2,
+csebuetnlp/banglat5,SentencePiece,False,,,failed at both learning rates
+microsoft/mdeberta-v3-base,SentencePiece,False,,,failed at both learning rates

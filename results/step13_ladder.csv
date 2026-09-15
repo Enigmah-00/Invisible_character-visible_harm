@@ -1,0 +1,10 @@
+model,family,tokenizer,config,n_targets,skipped_steps,evasion
+csebuetnlp/banglabert,WordPiece,ElectraTokenizerFast,gated_inert_ALL,1425,0,0.0
+csebuetnlp/banglabert,WordPiece,ElectraTokenizerFast,gated_adaptive_hasant_ALL,1425,0,0.0
+csebuetnlp/banglabert,WordPiece,ElectraTokenizerFast,gated_both_ALL,1425,0,0.0
+google/muril-base-cased,WordPiece,BertTokenizerFast,gated_inert_ALL,1393,0,0.0
+google/muril-base-cased,WordPiece,BertTokenizerFast,gated_adaptive_hasant_ALL,1393,0,0.0
+google/muril-base-cased,WordPiece,BertTokenizerFast,gated_both_ALL,1393,0,0.0
+xlm-roberta-base,SentencePiece,XLMRobertaTokenizerFast,gated_inert_ALL,1388,0,0.7205
+xlm-roberta-base,SentencePiece,XLMRobertaTokenizerFast,gated_adaptive_hasant_ALL,1388,0,0.0014
+xlm-roberta-base,SentencePiece,XLMRobertaTokenizerFast,gated_both_ALL,1388,0,0.7226

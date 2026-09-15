@@ -1,0 +1,4 @@
+model,family,benign_fpr_clean,benign_fpr_attacked,benign_flip_rate
+csebuetnlp/banglabert,WordPiece,0.0973,0.0967,0.0007
+google/muril-base-cased,WordPiece,0.086,0.086,0.0
+xlm-roberta-base,SentencePiece,0.0913,0.0193,0.0907

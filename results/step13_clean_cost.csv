@@ -1,0 +1,16 @@
+model,family,defense_on_clean,acc,f1
+csebuetnlp/banglabert,WordPiece,none,0.9228,0.9222
+csebuetnlp/banglabert,WordPiece,nfc,0.9228,0.9222
+csebuetnlp/banglabert,WordPiece,strip_all,0.9228,0.9222
+csebuetnlp/banglabert,WordPiece,position_aware,0.9228,0.9222
+csebuetnlp/banglabert,WordPiece,render_equivalence,0.9228,0.9222
+google/muril-base-cased,WordPiece,none,0.9195,0.9174
+google/muril-base-cased,WordPiece,nfc,0.9195,0.9174
+google/muril-base-cased,WordPiece,strip_all,0.9195,0.9174
+google/muril-base-cased,WordPiece,position_aware,0.9195,0.9174
+google/muril-base-cased,WordPiece,render_equivalence,0.9195,0.9174
+xlm-roberta-base,SentencePiece,none,0.9119,0.9097
+xlm-roberta-base,SentencePiece,nfc,0.9119,0.9097
+xlm-roberta-base,SentencePiece,strip_all,0.9121,0.9099
+xlm-roberta-base,SentencePiece,position_aware,0.9121,0.9099
+xlm-roberta-base,SentencePiece,render_equivalence,0.9121,0.9099

@@ -1,0 +1,16 @@
+model,attack,defense,evasion
+csebuetnlp/banglat5,gated_inert_ALL,none,0.8702
+csebuetnlp/banglat5,gated_inert_ALL,nfc,0.8702
+csebuetnlp/banglat5,gated_inert_ALL,strip_all,0.0
+csebuetnlp/banglat5,gated_inert_ALL,position_aware,0.0
+csebuetnlp/banglat5,gated_inert_ALL,render_equivalence,0.0
+csebuetnlp/banglat5,gated_adaptive_hasant_ALL,none,0.0062
+csebuetnlp/banglat5,gated_adaptive_hasant_ALL,nfc,0.0062
+csebuetnlp/banglat5,gated_adaptive_hasant_ALL,strip_all,0.0
+csebuetnlp/banglat5,gated_adaptive_hasant_ALL,position_aware,0.0062
+csebuetnlp/banglat5,gated_adaptive_hasant_ALL,render_equivalence,0.0
+csebuetnlp/banglat5,gated_both_ALL,none,0.8717
+csebuetnlp/banglat5,gated_both_ALL,nfc,0.8717
+csebuetnlp/banglat5,gated_both_ALL,strip_all,0.0
+csebuetnlp/banglat5,gated_both_ALL,position_aware,0.0062
+csebuetnlp/banglat5,gated_both_ALL,render_equivalence,0.0

@@ -1,0 +1,4 @@
+model,family,tokenizer,config,n_targets,evasion
+csebuetnlp/banglat5,SentencePiece,T5Tokenizer,gated_inert_ALL,1164,0.5756
+csebuetnlp/banglat5,SentencePiece,T5Tokenizer,gated_adaptive_hasant_ALL,1164,0.0155
+csebuetnlp/banglat5,SentencePiece,T5Tokenizer,gated_both_ALL,1164,0.5782

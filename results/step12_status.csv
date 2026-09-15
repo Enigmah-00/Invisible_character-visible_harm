@@ -1,0 +1,3 @@
+model,ok,lr,transformers,skipped_steps,error
+microsoft/mdeberta-v3-base,True,1e-05,4.46.3,0,
+csebuetnlp/banglat5,True,0.0001,4.46.3,0,

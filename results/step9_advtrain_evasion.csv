@@ -1,0 +1,9 @@
+model,attack,n_targets,evasion,evasion_with_our_defense
+baseline,ZWNJ (seen in training),1404,0.8041,0.0
+baseline,ZWJ (unseen character),1404,0.8063,0.0
+baseline,ZWSP (normalizer removes it),1404,0.0,0.0
+baseline,hasant (unseen position),1404,0.0021,0.0
+adv_trained,ZWNJ (seen in training),1397,0.048,0.0
+adv_trained,ZWJ (unseen character),1397,0.048,0.0
+adv_trained,ZWSP (normalizer removes it),1397,0.0,0.0
+adv_trained,hasant (unseen position),1397,0.0036,0.0

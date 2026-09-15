@@ -1,0 +1,3 @@
+model,ok,micro_batch,eff_batch,lr,eager,error
+csebuetnlp/banglat5,True,8.0,32,2e-05,False,
+microsoft/mdeberta-v3-base,False,,32,,True,RuntimeError: non-finite loss at epoch 0 micro-step 8

@@ -16,6 +16,11 @@ SentencePiece and byte-pair tokenizers pass it through.
 src/render_attack.py          attack, three defenses, corpus statistics
 notebooks/                    every experiment, in run order
 tools/make_paper_assets.py    builds all paper figures and tables from results/
+tools/make_example_figure.py  renders the Bangla figure, refuses to write it
+                              unless the two lines are pixel-identical
+tools/make_form_assets.py     builds the perceptibility study stimuli
+tools/score_google_form.py    scores the study, writes results/human_study.csv
+study/                        stimuli, answer key, anonymised responses
 results/*.csv                 every number in the paper
 requirements.txt
 ```
@@ -32,6 +37,7 @@ Notebooks, in the order they were run:
 | `nb06c_fp32_and_cure.ipynb` | BanglaT5 in fp32, plus the residual flag |
 | `nb06d_pipeline.ipynb` | End-to-end: unmitigated evasion |
 | `nb07_llm_verified.ipynb` | Qwen2.5-7B as a zero-shot moderator |
+| `nb08`-`nb13` | Putting every encoder on one protocol, and the mDeBERTa fix |
 
 `nb04` and `nb05` are deliberately absent. They produced the first version of
 these results using an attack that was **not** verified as invisible, so their
@@ -66,6 +72,20 @@ python tools/make_paper_assets.py
 
 It writes to `paper/fig/` and `paper/tab/`, and refuses to run if any result
 file is missing. No number in the paper is typed by hand.
+
+## Perceptibility study
+
+Eighteen Bangla readers judged 30 pairs of lines each. `study/form_answer_key.csv`
+gives the ground truth, `study/form_responses_anonymised.csv` the responses with
+registration numbers replaced by P01-P18 and timestamps removed, and
+`tools/score_google_form.py` reproduces the numbers in the paper.
+
+## A note on library versions
+
+Results use `transformers==4.46.3`, pinned deliberately. On version 5, mDeBERTa-v3
+produces a non-finite loss on its second optimizer step, and BanglaT5 loses eleven
+points of evasion because a different tokenizer is selected. `requirements.txt`
+pins the version.
 
 ## Note on content
 
