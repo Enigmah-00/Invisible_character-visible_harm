@@ -1,7 +1,7 @@
 group,n_participants,stimulus,measure,k,n,rate,ci_low,ci_high
-all,18,attacked pair,called different,5,360,0.0139,0.0059,0.0321
-all,18,identical images,called different,2,90,0.0222,0.0061,0.0774
-all,18,genuinely different pair,missed,0,90,0.0,0.0,0.0409
-daily_bangla_readers,13,attacked pair,called different,2,260,0.0077,0.0021,0.0276
-daily_bangla_readers,13,identical images,called different,0,65,0.0,0.0,0.0558
-daily_bangla_readers,13,genuinely different pair,missed,0,65,0.0,0.0,0.0558
+all,23,attacked pair,called different,6,460,0.013,0.006,0.0282
+all,23,identical images,called different,2,115,0.0174,0.0048,0.0612
+all,23,genuinely different pair,missed,0,115,0.0,0.0,0.0323
+daily_bangla_readers,16,attacked pair,called different,2,320,0.0063,0.0017,0.0225
+daily_bangla_readers,16,identical images,called different,0,80,0.0,0.0,0.0458
+daily_bangla_readers,16,genuinely different pair,missed,0,80,0.0,0.0,0.0458
