@@ -292,10 +292,10 @@ w("tab_defense.tex", tabular(
     "All defenses stop the attack. They differ on collateral damage to the "
     f"{tot} real comments that already contain zero-width characters. "
     "\\texttt{bnunicodenormalizer} is the published Bangla "
-    "normalizer~\\cite{bnnorm} used as a baseline; it removes every inserted "
-    "character. A dash means not measured, not zero: the other defenses return "
-    "the clean string itself, so their 0.0 follows by construction, while this "
-    "one also rewrites untouched text.",
+    "normalizer~\\cite{bnnorm} used as a baseline. The evasion columns come from "
+    "classifier runs that predate it; it was added afterwards and evaluated on "
+    "text alone, so a dash means not measured rather than zero. It does remove "
+    "every inserted character.",
     "defense", {"defense": dlab, "inert": pct, "adapt": pct,
                 "vis": lambda v: str(int(v)), "ms": lambda v: f"{float(v):.3f}"}, "lrrrr"),
     "step6_defense.csv + step14_collateral.csv + step6_latency.csv + step14_security.csv")
