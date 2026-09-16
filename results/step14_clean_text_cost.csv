@@ -1,0 +1,6 @@
+defense,clean_comments,codepoints_changed,pct_codepoints_changed,rendering_changed,pct_rendering_changed
+nfc,5029,2442,0.4856,1,0.0002
+strip_all,5029,42,0.0084,7,0.0014
+position_aware,5029,29,0.0058,3,0.0006
+bnunicodenormalizer,5029,942,0.1873,422,0.0839
+render_equivalence,5029,21,0.0042,0,0.0

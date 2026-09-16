@@ -38,6 +38,7 @@ Notebooks, in the order they were run:
 | `nb06d_pipeline.ipynb` | End-to-end: unmitigated evasion |
 | `nb07_llm_verified.ipynb` | Qwen2.5-7B as a zero-shot moderator |
 | `nb08`-`nb13` | Putting every encoder on one protocol, and the mDeBERTa fix |
+| `nb14_bnnorm_baseline.ipynb` | The published Bangla normalizer as a baseline defense |
 
 `nb04` and `nb05` are deliberately absent. They produced the first version of
 these results using an attack that was **not** verified as invisible, so their

@@ -1,0 +1,16 @@
+attack,defense,exact_clean_recovery,zero_width_remaining,ms_per_comment
+gated_inert_ALL,nfc,0.0,1.0,0.033
+gated_inert_ALL,strip_all,0.9973,0.0,0.011
+gated_inert_ALL,position_aware,0.9973,0.0,0.127
+gated_inert_ALL,bnunicodenormalizer,0.828,0.0,12.907
+gated_inert_ALL,render_equivalence,0.998,0.0013,3.015
+gated_adaptive_hasant_ALL,nfc,0.438,0.164,0.029
+gated_adaptive_hasant_ALL,strip_all,0.9973,0.0,0.003
+gated_adaptive_hasant_ALL,position_aware,0.836,0.162,0.045
+gated_adaptive_hasant_ALL,bnunicodenormalizer,0.828,0.0,10.932
+gated_adaptive_hasant_ALL,render_equivalence,0.998,0.0013,0.096
+gated_both_ALL,nfc,0.0,1.0,0.03
+gated_both_ALL,strip_all,0.9973,0.0,0.008
+gated_both_ALL,position_aware,0.836,0.162,0.098
+gated_both_ALL,bnunicodenormalizer,0.828,0.0,12.563
+gated_both_ALL,render_equivalence,0.998,0.0013,1.503
