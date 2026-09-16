@@ -21,7 +21,8 @@ sys.path.insert(0, "src")
 import render_attack as ra
 
 SP = os.environ.get("SCRATCH", ".")
-FONT = os.path.join(SP, "NotoSansBengali-Regular.ttf")
+FONT_PATHS = ra.fetch_fonts(os.path.join(SP, "fonts_fig"))
+FONT = FONT_PATHS["NotoSansBengali"]
 SIZE, PAD = 96, 14
 
 ZWJ, ZWNJ = ra.ZWJ, ra.ZWNJ
@@ -48,7 +49,7 @@ def pad_to(a, shape):
     return out
 
 
-renderer = ra.Renderer(ra.fetch_fonts(os.path.join(SP, "fonts_fig")))
+renderer = ra.Renderer(FONT_PATHS)
 attacked, n = renderer.attack(CLEAN, "ALL", mode="inert", seed=7)
 
 A, B = render(CLEAN), render(attacked)
@@ -71,9 +72,9 @@ fig, ax = plt.subplots(4, 1, figsize=(3.4, 2.45),
                        gridspec_kw={"height_ratios": [1, 1, 1, 1], "hspace": 0.55})
 for a_, img, lab in [
         (ax[0], A, f"(a) original comment"),
-        (ax[1], B, f"(a) after inserting {n} invisible characters"),
+        (ax[1], B, f"after inserting {n} invisible characters"),
         (ax[2], C, "(b) RAB, as people write it"),
-        (ax[3], D, "(b) the same word after strip-all")]:
+        (ax[3], D, "the same word after strip-all")]:
     a_.imshow(img, cmap="gray", vmin=0, vmax=255, interpolation="lanczos")
     a_.set_title(lab, fontsize=7, pad=2, loc="left")
     a_.axis("off")
