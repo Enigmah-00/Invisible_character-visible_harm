@@ -23,6 +23,29 @@ ZWNJ, ZWJ, ZWSP = "‌", "‍", "​"
 HASANT = "্"
 ZW = (ZWNJ, ZWJ, ZWSP)
 
+# Other invisible characters an adaptive attacker can use. CGJ and the variation
+# selectors are category Mn, so BertTokenizer._clean_text (which drops only
+# category C) keeps them; LRM is Cf like ZWNJ.
+CGJ, VS16, LRM = "͏", "️", "‎"
+
+# Default_Ignorable_Code_Point, Unicode DerivedCoreProperties.txt: every code
+# point a renderer may draw as nothing.
+_DI_RANGES = ((0x00AD, 0x00AD), (0x034F, 0x034F), (0x061C, 0x061C), (0x115F, 0x1160),
+              (0x17B4, 0x17B5), (0x180B, 0x180F), (0x200B, 0x200F), (0x202A, 0x202E),
+              (0x2060, 0x206F), (0x3164, 0x3164), (0xFE00, 0xFE0F), (0xFEFF, 0xFEFF),
+              (0xFFA0, 0xFFA0), (0xFFF0, 0xFFF8), (0x1BCA0, 0x1BCA3), (0x1D173, 0x1D17A),
+              (0xE0000, 0xE0FFF))
+
+
+def is_default_ignorable(ch):
+    o = ord(ch) if len(ch) == 1 else -1
+    return any(a <= o <= b for a, b in _DI_RANGES)
+
+
+def is_zero_width(ch):
+    """The three characters the paper's defenses were defined over."""
+    return ch in ZW
+
 # Open-licensed Bangla fonts, all downloadable on Kaggle.
 FONT_URLS = {
     "NotoSansBengali":  "https://github.com/notofonts/notofonts.github.io/raw/main/fonts/NotoSansBengali/unhinted/ttf/NotoSansBengali-Regular.ttf",
@@ -154,22 +177,26 @@ class Renderer:
 
     # ------------------------------------------------------------ defense
 
-    def defend_render_equivalence(self, text, fonts=None):
+    def defend_render_equivalence(self, text, fonts=None, invisible=is_zero_width):
         """Delete a zero-width char iff removing it leaves rendering unchanged in
         every reference font. Only chars whose nearest non-zero-width neighbours
-        on both sides are Bangla are considered, so emoji ZWJ sequences survive."""
+        on both sides are Bangla are considered, so emoji ZWJ sequences survive.
+
+        `invisible` picks the candidate characters. The default is the paper's
+        three zero-width characters; pass is_default_ignorable to cover every
+        character Unicode allows to be drawn as nothing."""
         parts = _parts(text)
         for pi, w in enumerate(parts):
-            if not any(z in w for z in ZW):
+            if not any(invisible(c) for c in w):
                 continue
             i = 0
             while i < len(w):
-                if w[i] in ZW:
+                if invisible(w[i]):
                     l = i - 1
-                    while l >= 0 and w[l] in ZW:
+                    while l >= 0 and invisible(w[l]):
                         l -= 1
                     r = i + 1
-                    while r < len(w) and w[r] in ZW:
+                    while r < len(w) and invisible(w[r]):
                         r += 1
                     if l >= 0 and r < len(w) and is_bangla(w[l]) and is_bangla(w[r]):
                         cand = w[:i] + w[i + 1:]
@@ -198,10 +225,26 @@ def attack_ungated(text, budget="ALL", char=ZWNJ, seed=0, mode="inert"):
     return out, len(cands)
 
 
-def defend_strip_all(text):
-    for z in ZW:
-        text = text.replace(z, "")
-    return text
+def defend_strip_all(text, invisible=is_zero_width):
+    return "".join(c for c in text if not invisible(c))
+
+
+def residual_flag(text, invisible=is_zero_width):
+    """True if a candidate character survives next to a Bangla letter.
+
+    Run it on text the render-equivalence defense has already cleaned. The
+    zero-width characters beside a hasant do real orthographic work and are not
+    flagged (the paper's rule); any other invisible character there is."""
+    for i, ch in enumerate(text):
+        if not invisible(ch):
+            continue
+        prev = text[i - 1] if i > 0 else ""
+        nxt = text[i + 1] if i + 1 < len(text) else ""
+        if ch in ZW and HASANT in (prev, nxt):
+            continue
+        if is_bangla(prev) or is_bangla(nxt):
+            return True
+    return False
 
 
 def defend_nfc(text):

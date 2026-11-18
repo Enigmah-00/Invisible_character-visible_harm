@@ -1,0 +1,5 @@
+script,attack,fonts,sentences,mean_inserted,visible_any_font,MuRIL,XLM-R,mT5,Qwen2.5
+Hindi (Devanagari),ZWNJ,8,20,7.9,0,0,20,20,20
+Hindi (Devanagari),CGJ,8,20,5.5,0,20,20,20,20
+Punjabi (Gurmukhi),ZWNJ,6,20,8.0,0,0,20,20,20
+Punjabi (Gurmukhi),CGJ,6,20,6.2,0,20,20,20,20

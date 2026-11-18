@@ -1,0 +1,7 @@
+dataset,model,family,seed,attack,defense,n_targets,evaded,evasion
+blp25,muril,WordPiece,44,zwnj,none,1176,2,0.0017
+blp25,muril,WordPiece,44,zwnj,render_equivalence,1176,0,0.0
+blp25,muril,WordPiece,44,zwnj,render_equivalence_di,1176,0,0.0
+blp25,muril,WordPiece,44,cgj,none,1176,1174,0.9983
+blp25,muril,WordPiece,44,cgj,render_equivalence,1176,1174,0.9983
+blp25,muril,WordPiece,44,cgj,render_equivalence_di,1176,0,0.0

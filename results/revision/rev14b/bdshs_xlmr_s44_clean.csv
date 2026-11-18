@@ -1,0 +1,3 @@
+dataset,model,family,seed,defense_on_clean,acc,f1
+bdshs,xlmr,SentencePiece,44,none,0.9111,0.9092
+bdshs,xlmr,SentencePiece,44,render_equivalence_di,0.9113,0.9094

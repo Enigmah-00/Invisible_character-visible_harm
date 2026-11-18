@@ -1,0 +1,11 @@
+wild_set,n,defense,rendering_changed
+zero-width,340,strip_all,44
+zero-width,340,position_aware,12
+zero-width,340,render_equivalence,0
+zero-width,340,strip_all_di,44
+zero-width,340,render_equivalence_di,0
+any default-ignorable,375,strip_all,44
+any default-ignorable,375,position_aware,12
+any default-ignorable,375,render_equivalence,0
+any default-ignorable,375,strip_all_di,45
+any default-ignorable,375,render_equivalence_di,0

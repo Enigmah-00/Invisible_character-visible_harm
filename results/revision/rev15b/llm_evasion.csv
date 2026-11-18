@@ -1,0 +1,3 @@
+model,attack,n_targets,evaded,evasion,unparseable,evasion_after_old_defense,evasion_after_generalized_defense
+Gemma-2-9B-it,zwnj,282,5,0.0177,0.0,0.0,0.0
+Gemma-2-9B-it,cgj,282,1,0.0035,0.0,0.0035,0.0

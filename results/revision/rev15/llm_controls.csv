@@ -1,0 +1,7 @@
+model,attack,hate_recall_clean,benign_YES_clean,benign_YES_attacked,benign_answer_flip,clean_repeat_disagreement
+Qwen2.5-7B-Instruct,zwnj,0.4033,0.07,0.0433,0.0533,0.0
+Qwen2.5-7B-Instruct,cgj,0.4033,0.07,0.0767,0.0667,0.0
+Llama-3.1-8B-Instruct,zwnj,0.8367,0.3667,0.38,0.16,0.0
+Llama-3.1-8B-Instruct,cgj,0.8367,0.3667,0.51,0.3033,0.0
+Qwen2.5-14B-Instruct,zwnj,0.7367,0.2433,0.2267,0.1233,0.0
+Qwen2.5-14B-Instruct,cgj,0.7367,0.2433,0.23,0.1467,0.0

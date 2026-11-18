@@ -1,0 +1,7 @@
+dataset,model,family,seed,attack,defense,n_targets,evaded,evasion
+bdshs,mdeberta,SentencePiece,43,zwnj,none,1401,1379,0.9843
+bdshs,mdeberta,SentencePiece,43,zwnj,render_equivalence,1401,1,0.0007
+bdshs,mdeberta,SentencePiece,43,zwnj,render_equivalence_di,1401,1,0.0007
+bdshs,mdeberta,SentencePiece,43,cgj,none,1401,345,0.2463
+bdshs,mdeberta,SentencePiece,43,cgj,render_equivalence,1401,345,0.2463
+bdshs,mdeberta,SentencePiece,43,cgj,render_equivalence_di,1401,1,0.0007

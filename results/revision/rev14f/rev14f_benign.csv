@@ -1,0 +1,11 @@
+dataset,model,family,seed,attack,benign_fpr_clean,benign_fpr_attacked,benign_flip_rate
+blp25,banglabert,WordPiece,44,zwnj,0.2007,0.2007,0.0
+blp25,banglabert,WordPiece,44,cgj,0.2007,0.0,0.2007
+blp25,banglat5,SentencePiece,44,zwnj,0.1413,0.5527,0.502
+blp25,banglat5,SentencePiece,44,cgj,0.1413,0.2807,0.2887
+blp25,mdeberta,SentencePiece,44,zwnj,0.19,0.0,0.19
+blp25,mdeberta,SentencePiece,44,cgj,0.19,0.0607,0.1547
+blp25,muril,WordPiece,44,zwnj,0.184,0.184,0.0
+blp25,muril,WordPiece,44,cgj,0.184,0.0,0.184
+blp25,xlmr,SentencePiece,44,zwnj,0.1973,0.622,0.5313
+blp25,xlmr,SentencePiece,44,cgj,0.1973,0.3227,0.3133

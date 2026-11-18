@@ -1,0 +1,3 @@
+dataset,model,family,seed,defense_on_clean,acc,f1
+bdshs,mdeberta,SentencePiece,43,none,0.9105,0.9091
+bdshs,mdeberta,SentencePiece,43,render_equivalence_di,0.9105,0.9091

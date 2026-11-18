@@ -1,0 +1,7 @@
+dataset,model,family,seed,set,n,flag_rule,flag_decision,old_flag,evaded_after_defense,unmitigated_rule,unmitigated_decision,old_pipeline_unmitigated
+blp25,xlmr,SentencePiece,42,clean test (benign),10200,0.0,0.0,0.0,,,,
+blp25,xlmr,SentencePiece,42,attack zwnj (hate targets),1176,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+blp25,xlmr,SentencePiece,42,attack cgj (hate targets),1176,0.0,0.0,0.0,0.0,0.0,0.0,0.1241
+blp25,xlmr,SentencePiece,42,attack vs16 (hate targets),1176,0.0,0.0,0.0,0.0,0.0,0.0,0.2423
+blp25,xlmr,SentencePiece,42,attack lrm (hate targets),1176,0.0,0.0,0.0,0.0,0.0,0.0,0.2075
+blp25,xlmr,SentencePiece,42,attack zwnj_ungated (hate targets),1176,0.7908,0.0476,0.7908,0.0476,0.0,0.0,0.0

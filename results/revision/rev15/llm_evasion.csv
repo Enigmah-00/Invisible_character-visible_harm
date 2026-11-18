@@ -1,0 +1,7 @@
+model,attack,n_targets,evaded,evasion,unparseable,evasion_after_old_defense,evasion_after_generalized_defense
+Qwen2.5-7B-Instruct,zwnj,121,55,0.4545,0.0,0.0,0.0
+Qwen2.5-7B-Instruct,cgj,121,40,0.3306,0.0,0.3306,0.0
+Llama-3.1-8B-Instruct,zwnj,251,54,0.2151,0.0,0.0,0.0
+Llama-3.1-8B-Instruct,cgj,251,29,0.1155,0.0,0.1155,0.0
+Qwen2.5-14B-Instruct,zwnj,221,48,0.2172,0.0,0.0,0.0
+Qwen2.5-14B-Instruct,cgj,221,37,0.1674,0.0,0.1674,0.0

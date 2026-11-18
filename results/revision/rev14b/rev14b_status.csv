@@ -1,0 +1,11 @@
+dataset,model,family,seed,level,n_train,skipped_steps,train_minutes,transformers,device
+bdshs,banglabert,WordPiece,43,seed,40224,0,15.0,4.46.3,cuda
+bdshs,banglabert,WordPiece,44,seed,40224,0,16.0,4.46.3,cuda
+bdshs,banglat5,SentencePiece,43,seed,40224,0,36.9,4.46.3,cuda
+bdshs,banglat5,SentencePiece,44,seed,40224,0,38.6,4.46.3,cuda
+bdshs,mdeberta,SentencePiece,43,seed,40224,0,33.4,4.46.3,cuda
+bdshs,mdeberta,SentencePiece,44,seed,40224,0,35.3,4.46.3,cuda
+bdshs,muril,WordPiece,43,seed,40224,0,19.3,4.46.3,cuda
+bdshs,muril,WordPiece,44,seed,40224,0,19.3,4.46.3,cuda
+bdshs,xlmr,SentencePiece,43,seed,40224,0,24.6,4.46.3,cuda
+bdshs,xlmr,SentencePiece,44,seed,40224,0,24.6,4.46.3,cuda

@@ -1,0 +1,2 @@
+dataset,model,family,seed,level,n_train,skipped_steps,train_minutes,transformers,device
+bdshs,banglabert,WordPiece,43,seed,40224,0,15.0,4.46.3,cuda

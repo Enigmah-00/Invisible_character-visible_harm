@@ -1,0 +1,11 @@
+dataset,model,family,seed,defense_on_clean,acc,f1
+blp25,banglabert,WordPiece,43,none,0.8111,0.7908
+blp25,banglabert,WordPiece,43,render_equivalence_di,0.8111,0.7908
+blp25,banglat5,SentencePiece,43,none,0.667,0.4973
+blp25,banglat5,SentencePiece,43,render_equivalence_di,0.667,0.4973
+blp25,mdeberta,SentencePiece,43,none,0.7982,0.7723
+blp25,mdeberta,SentencePiece,43,render_equivalence_di,0.7982,0.7723
+blp25,muril,WordPiece,43,none,0.8008,0.7693
+blp25,muril,WordPiece,43,render_equivalence_di,0.8008,0.7693
+blp25,xlmr,SentencePiece,43,none,0.7919,0.7681
+blp25,xlmr,SentencePiece,43,render_equivalence_di,0.7919,0.7681

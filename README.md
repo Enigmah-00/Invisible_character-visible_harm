@@ -14,8 +14,15 @@ SentencePiece and byte-pair tokenizers pass it through.
 
 ```
 src/render_attack.py          attack, three defenses, corpus statistics
+src/revision_run.py           revision experiments (other invisible characters,
+                              second dataset, seeds, adversarial training)
 notebooks/                    every experiment, in run order
 tools/make_paper_assets.py    builds all paper figures and tables from results/
+tools/make_revision_tables.py builds the revision tables and numbers from
+                              results/revision/
+tools/make_revision_notebooks.py  builds the nb14a-f and nb15 notebooks from src/
+tools/rev_checks/             CPU-side revision checks (CoreText, character
+                              categories, dataset overlap)
 tools/make_example_figure.py  renders the Bangla figure, refuses to write it
                               unless the two lines are pixel-identical
 tools/make_form_assets.py     builds the perceptibility study stimuli
@@ -44,6 +51,36 @@ Notebooks, in the order they were run:
 these results using an attack that was **not** verified as invisible, so their
 numbers were superseded by `nb06`/`nb07` and are not part of the paper.
 
+## Revision experiments
+
+Added after review. All of them use the protocol of `nb13` (full training set,
+2 epochs, `transformers==4.46.3`, full precision) and write their CSVs to
+`results/revision/<run>/`.
+
+| Notebook | What it does |
+|---|---|
+| `nb14a_revision_bdshs_seed42.ipynb` | BD-SHS, five models, seed 42: attacks with CGJ (U+034F), VS16 (U+FE0F) and LRM (U+200E) besides ZWNJ; the defense generalized to every default-ignorable code point; the decision-change rule for the residual flag |
+| `nb14b_revision_bdshs_seeds.ipynb` | The same five models with seeds 43 and 44 |
+| `nb14c_revision_dataset2.ipynb` | Second dataset: BLP-2025 shared task, subtask 1A, seed 42 |
+| `nb14e_revision_blp_seed43.ipynb`, `nb14f_revision_blp_seed44.ipynb` | BLP-2025 with seeds 43 and 44 |
+| `nb14d_revision_advtrain.ipynb` | Adversarial training of XLM-RoBERTa on ZWNJ-attacked text, tested on characters it never saw |
+| `nb15_revision_llms.ipynb` | Zero-shot LLM moderators: Qwen2.5-7B, Llama-3.1-8B, Gemma-2-9B, Qwen2.5-14B |
+| `nb15b_revision_gemma.ipynb` | Gemma-2-9B again with a smaller batch, after it ran out of memory in `nb15` |
+
+`nb14_bnnorm_baseline.ipynb` belongs to the submitted version and is unrelated to
+`nb14a`-`nb14f`.
+
+To rebuild the revision tables and every number they feed:
+
+```bash
+python tools/make_revision_tables.py results/revision out/
+```
+
+The CPU-side checks in `tools/rev_checks/` need the datasets locally;
+`coretext_glyphs.py` and `coretext_breakdown.py` also need macOS and PyObjC and
+are run from inside that folder. Their outputs are `results/rev_coretext.csv`
+and `results/rev_indic_tokenizers.csv`.
+
 ## Threat model
 
 An insertion counts as imperceptible only if HarfBuzz shapes the word to the
@@ -58,7 +95,8 @@ downloads them; they are not redistributed here.
 
 Data is **not** included. BD-SHS is third-party and we do not redistribute it.
 Get it from the authors of that dataset; it is also mirrored on Kaggle as
-`naurosromim/bdshs`.
+`naurosromim/bdshs`. The revision notebooks that use BLP-2025 download it from
+the shared task's public repository themselves.
 
 The notebooks were run on Kaggle with two T4 GPUs and internet enabled. Each one
 is self-contained: it writes `render_attack.py` to the working directory, fetches
@@ -76,9 +114,9 @@ file is missing. No number in the paper is typed by hand.
 
 ## Perceptibility study
 
-Eighteen Bangla readers judged 30 pairs of lines each. `study/form_answer_key.csv`
+Twenty-three Bangla readers judged 30 pairs of lines each. `study/form_answer_key.csv`
 gives the ground truth, `study/form_responses_anonymised.csv` the responses with
-registration numbers replaced by P01-P18 and timestamps removed, and
+registration numbers replaced by P01-P23 and timestamps removed, and
 `tools/score_google_form.py` reproduces the numbers in the paper.
 
 ## A note on library versions

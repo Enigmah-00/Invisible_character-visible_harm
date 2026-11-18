@@ -1,0 +1,3 @@
+dataset,model,family,seed,attack,benign_fpr_clean,benign_fpr_attacked,benign_flip_rate
+blp25,banglat5,SentencePiece,44,zwnj,0.1413,0.5527,0.502
+blp25,banglat5,SentencePiece,44,cgj,0.1413,0.2807,0.2887

@@ -1,0 +1,6 @@
+dataset,model,family,seed,level,n_train,skipped_steps,train_minutes,transformers,device
+blp25,banglabert,WordPiece,44,seed,35522,0,12.6,4.46.3,cuda
+blp25,banglat5,SentencePiece,44,seed,35522,0,30.1,4.46.3,cuda
+blp25,mdeberta,SentencePiece,44,seed,35522,0,29.8,4.46.3,cuda
+blp25,muril,WordPiece,44,seed,35522,0,16.4,4.46.3,cuda
+blp25,xlmr,SentencePiece,44,seed,35522,0,19.6,4.46.3,cuda

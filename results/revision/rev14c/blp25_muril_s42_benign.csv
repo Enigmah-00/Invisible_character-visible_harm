@@ -1,0 +1,3 @@
+dataset,model,family,seed,attack,benign_fpr_clean,benign_fpr_attacked,benign_flip_rate
+blp25,muril,WordPiece,42,zwnj,0.1993,0.1987,0.0007
+blp25,muril,WordPiece,42,cgj,0.1993,0.0,0.1993

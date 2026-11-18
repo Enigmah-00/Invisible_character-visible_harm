@@ -1,0 +1,9 @@
+dataset,model,family,seed,set,n,flag_rule,flag_decision,old_flag,evaded_after_defense,unmitigated_rule,unmitigated_decision,old_pipeline_unmitigated
+bdshs,banglabert,WordPiece,42,wild zero-width (benign),340,0.2235,0.0,0.2206,,,,
+bdshs,banglabert,WordPiece,42,wild any default-ignorable (benign),375,0.224,0.0,0.2,,,,
+bdshs,banglabert,WordPiece,42,clean test (benign),5029,0.003,0.0,0.0026,,,,
+bdshs,banglabert,WordPiece,42,attack zwnj (hate targets),1425,0.0014,0.0,0.0014,0.0,0.0,0.0,0.0
+bdshs,banglabert,WordPiece,42,attack cgj (hate targets),1425,0.0014,0.0,0.0014,0.0,0.0,0.0,0.9958
+bdshs,banglabert,WordPiece,42,attack vs16 (hate targets),1425,0.0014,0.0,0.0014,0.0,0.0,0.0,0.6014
+bdshs,banglabert,WordPiece,42,attack lrm (hate targets),1425,0.0014,0.0,0.0014,0.0,0.0,0.0,0.0
+bdshs,banglabert,WordPiece,42,attack zwnj_ungated (hate targets),1425,0.7425,0.0,0.7425,0.0,0.0,0.0,0.0

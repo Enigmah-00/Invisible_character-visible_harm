@@ -1,0 +1,8 @@
+dataset,model,family,seed,defense_on_clean,acc,f1
+blp25,banglabert,WordPiece,42,none,0.81,0.7895
+blp25,banglabert,WordPiece,42,nfc,0.81,0.7895
+blp25,banglabert,WordPiece,42,strip_all,0.81,0.7895
+blp25,banglabert,WordPiece,42,position_aware,0.81,0.7895
+blp25,banglabert,WordPiece,42,render_equivalence,0.81,0.7895
+blp25,banglabert,WordPiece,42,strip_all_di,0.81,0.7895
+blp25,banglabert,WordPiece,42,render_equivalence_di,0.81,0.7895
