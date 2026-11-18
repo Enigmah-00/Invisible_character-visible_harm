@@ -175,7 +175,7 @@ if len(ev):
         cr = c340[c340.defense == key].rendering_changed if len(c340) and key not in ("none", "nfc") else []
         rows.append([label] + cells + [str(int(cr.iloc[0])) if len(cr) else ("0" if key in ("none", "nfc") else "--")])
     table("tab_defense.tex", "tab:defense",
-          "Defenses on XLM-R: evasion (\\%) per character, and real comments with zero-width characters "
+          "Defenses on XLM-R, seed 42: evasion (\\%) per character, and real comments with zero-width characters "
           "each defense visibly damages.",
           ["Defense", "ZWNJ", "CGJ", "VS16", "LRM", "Damaged/340"], rows)
     old = fl[(fl.dataset == "bdshs") & (fl.model == "xlmr") & (fl.seed == 42)] if len(fl) else pd.DataFrame()
@@ -198,7 +198,7 @@ if len(fl):
         un = lambda c: pct(r[c].max()) if c in r and r[c].notna().any() else "--"
         rows.append([lab, pct(r.flag_rule.max()), pct(r.flag_decision.max()), un("unmitigated_rule"), un("unmitigated_decision")])
     table("tab_pipeline.tex", "tab:pipeline",
-          "Review burden on XLM-R after the generalized defense (\\%). Unmitigated: evaded and never flagged.",
+          "Review burden on XLM-R, seed 42, after the generalized defense (\\%). Unmitigated: evaded and never flagged.",
           ["Set", "Flag: rule", "decision", "Unmit.: rule", "decision"], rows)
     w = f[f.set == "wild zero-width (benign)"]
     t = f[f.set == "clean test (benign)"]
